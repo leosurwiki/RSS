@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+    <script src="../build/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="NewURLTarget"></div>
+    
+    <script type="text/babel">
+    	var URLManager = React.createClass({
+    		handleSubmit: function () {
+    			console.log(this.refs.myTextInput.value);
+    			localstorage.urls += '*' + this.refs.myTextInput.value;
+    		},
+    		render: function () {    		
+    			return(
+    				<div>
+    					<input type="text" ref="myTextInput" />
+    					<input type = "button" value="Add" onClick={this.handleSubmit} />
+    				</div>
+    			);
+    		}
+    	});
+
+    	var URLEntry = React.createClass({
+    		render: function () {    		
+    			return(
+    				<div>
+    					<h1>{this.props.url}</h1>
+    				</div>
+    			);
+    		}
+    	});
+
+    	var URLTable =  React.createClass({
+    		getInitialState: function() {
+    			return {urls: localsotrage['StoredURL']}
+    		},
+    		render: function () {    		
+    			return(
+    			<ol></ol>
+    			);
+    		}
+    	});
+
+
+    	ReactDOM.render(
+    		<URLManager/>,
+    		document.getElementById('NewURLTarget')
+    	);
+    </script>
+  </body>
+</html>
